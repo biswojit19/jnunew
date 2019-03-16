@@ -36,6 +36,15 @@
 
                                    <select class="form-control" id="department" name="department">
                                      <option  value=""></option>
+                                        @if(!empty($states))
+
+                                        @foreach($departments as $key => $value)
+
+                                        <option value="{{ $key }}">{{ $value }}</option>
+
+                                        @endforeach
+
+                                        @endif
                                    </select>
 
                                </div>

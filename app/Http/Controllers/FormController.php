@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use App\Post;
+use App\JobPost;
+use App\Designation;
+use App\Department;
+use App\User;
+use App\PostJobCategory;
 
 class FormController extends Controller
 {
@@ -75,6 +82,33 @@ class FormController extends Controller
     public function apply()
     {
         return view("site.apply");  
+    }
+
+    public function department(Request $request){       
+
+
+        $html = '';
+        $html .=' <option  value=""></option>';
+        $departments = Department::all();
+        foreach ($departments as $department) {
+            $html .= '<option value="'.$department->id.'">'.$department->name.'</option>';
+        }
+        return response()->json(['html' => $html]);
+
+    }
+
+    public function advertisement(Request $request){       
+
+       // dd($request->post);
+        $html = '';
+        $html .=' <option  value=""></option>';
+        $advertisements = JobPost::where('post','=',$request->post)->where('department','=',$request->department)->get();;
+        foreach ($advertisements as $advertisement) {
+            $html .= '<option value="'.$advertisement->id.'">'.$advertisement->code.'</option>';
+        }
+        return response()->json(['html' => $html]);
+       
+
     }
 
 

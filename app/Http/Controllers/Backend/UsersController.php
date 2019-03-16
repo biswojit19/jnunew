@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\Permission;
+use App\User;
+use App\Role;
+use App\Permission;
 
 class UsersController extends Controller
 {
@@ -21,26 +21,30 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate(10);
+        $usersCount = User::count();
         
         $params = [
             'title' => 'Users Listing',
+            'usersCount' => $usersCount,
             'users' => $users,
+            
         ];
 
-        return view('admin.users.users_list')->with($params);
+        return view('backend.users.index')->with($params);
     }
 
     // Create User Page
     public function create()
     {
         $roles = Role::all();
-
+        $user = new User();
         $params = [
             'title' => 'Create User',
             'roles' => $roles,
+            'user' => $user,
         ];
 
-        return view('admin.users.users_create')->with($params);
+        return view('backend.users.create')->with($params);
     }
 
     // Store New User
