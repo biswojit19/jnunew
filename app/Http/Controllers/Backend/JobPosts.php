@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\BackendController;
+use App\Http\Controllers\Backend\BackendController;
 use App\Category;
 use App\Post;
 use App\JobPost;
@@ -38,11 +38,11 @@ class JobPosts extends BackendController
      */
     public function create()
     {
-        //$category = new JobPost();
+        $jobpost = new JobPost();
         $items = Designation::all(['id', 'name']);
         $departments = Department::all(['id','name']);
         
-        return view("backend.jobposts.create", compact('items',$items,'departments',$departments));
+        return view("backend.jobposts.create", compact('items','departments','jobpost'));
     }
 
     /**
@@ -100,7 +100,7 @@ class JobPosts extends BackendController
     {
         $jobpost = JobPost::findOrFail($id);
         //dd($jobpost);
-
+//
         return view("backend.jobposts.edit", compact('jobpost'));
     }
 

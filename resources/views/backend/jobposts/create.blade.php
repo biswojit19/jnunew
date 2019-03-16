@@ -23,7 +23,7 @@
       <!-- Main content -->
       <section class="content">
           <div class="row">
-              {!! Form::model($jobposts, [
+              {!! Form::model($jobpost, [
                   'method' => 'POST',
                   'route'  => 'backend.jobposts.store',
                   'files'  => TRUE,

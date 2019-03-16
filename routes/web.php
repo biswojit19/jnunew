@@ -128,6 +128,8 @@ Route::get('/backend/designations/search', [
     'as'   => 'backend.designations.search'
 ]);
 //Route::resource('/backend/designations', 'Backend\Designations'); 
+
+Route::get('/backend/designations/create', 'Backend\Designations@create')->name('backend.designations.create');
 Route::get('/backend/designations/destroy', 'Backend\Designations@destroy')->name('backend.designations.destroy');
 Route::get('/backend/designations/edit/{blog}', 'Backend\Designations@edit')->name('backend.designations.edit');
 Route::put('/backend/designations/update/{blog}', 'Backend\Designations@update')->name('backend.designations.update');
@@ -139,10 +141,16 @@ Route::get('/backend/designations', [
 
 //JobPOst
 //Route::resource('/backend/jobposts', 'Backend\JobPosts'); 
-
+Route::get('/backend/jobposts/create', 'Backend\JobPosts@create')->name('backend.jobposts.create');
+Route::get('/backend/jobposts/show', 'Backend\JobPosts@show')->name('backend.jobposts.show');
 Route::get('/backend/jobposts/destroy', 'Backend\JobPosts@destroy')->name('backend.jobposts.destroy');
 Route::get('/backend/jobposts/edit/{blog}', 'Backend\JobPosts@edit')->name('backend.jobposts.edit');
 Route::put('/backend/jobposts/update/{blog}', 'Backend\JobPosts@update')->name('backend.jobposts.update');
+Route::get('/backend/jobposts/store', 'Backend\JobPosts@store')->name('backend.jobposts.store');
+
+
+
+
 
 Route::get('/backend/jobposts/search', [
     'uses' => 'Backend\JobPosts@search',
