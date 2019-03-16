@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.jobposts.index') }}">jobposts</a></li>
+          <li><a href="{{ route('jobposts.index') }}">jobposts</a></li>
           <li class="active">Add new</li>
         </ol>
       </section>
@@ -25,7 +25,7 @@
           <div class="row">
               {!! Form::model($jobpost, [
                   'method' => 'POST',
-                  'route'  => 'backend.jobposts.store',
+                  'route'  => 'jobposts.store',
                   'files'  => TRUE,
                   'id' => 'jobposts-form'
               ]) !!}

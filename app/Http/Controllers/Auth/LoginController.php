@@ -42,7 +42,7 @@ class LoginController extends Controller
 	protected function authenticated(Request $request, $user)
     {
 		if($user->hasRole('administrator')){
-			return redirect()->route('backend.designations');
+			return redirect()->route('designations');
 		}else{
 			return redirect()->route('form.eligibility');
 		}

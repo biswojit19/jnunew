@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.jobposts.index') }}">Job Posts</a></li>
+          <li><a href="{{ route('jobposts.index') }}">Job Posts</a></li>
           <li class="active">Edit Job Posts</li>
         </ol>
       </section>
@@ -25,7 +25,7 @@
           <div class="row">
               {!! Form::model($jobpost, [
                   'method' => 'PUT',
-                  'route'  => ['backend.jobposts.update', $jobpost->id],
+                  'route'  => ['jobposts.update', $jobpost->id],
                   'files'  => TRUE,
                   'id' => 'post-form'
               ]) !!}

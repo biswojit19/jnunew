@@ -52,7 +52,7 @@
                
                  <td>
                     {!! Form::open(['method' => 'DELETE', 'route' => ['backend.departments.destroy', $department->id]]) !!}
-                        <a href="{{ route('backend.departments.edit', $department->id) }}" class="btn btn-xs btn-default">
+                        <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-xs btn-default">
                             <i class="fa fa-edit"></i>
                         </a>
                         @if($department->id == config('cms.default_department_id'))

@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.users.index') }}">Users</a></li>
+          <li><a href="{{ route('users.index') }}">Users</a></li>
           <li class="active">Edit user</li>
         </ol>
       </section>
@@ -25,7 +25,7 @@
           <div class="row">
               {!! Form::model($user, [
                   'method' => 'PUT',
-                  'route'  => ['backend.users.update', $user->id],
+                  'route'  => ['users.update', $user->id],
                   'files'  => TRUE,
                   'id'     => 'user-form'
               ]) !!}

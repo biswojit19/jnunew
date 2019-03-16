@@ -84,138 +84,132 @@ Route::get('/candidate', 'CandidateController@index')->name('candidate');
 // Administrator & SuperAdministrator Control Panel Routes
 Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'middleware' => ['role:administrator|superadministrator'], 'namespace' => 'Backend'], function () {
 	
-	
-    Route::put('/backend/blog/restore/{blog}', [
-        'uses' => 'Backend\BlogController@restore',
-        'as'   => 'backend.blog.restore'
-    ]);
-    Route::delete('/backend/blog/force-destroy/{blog}', [
-        'uses' => 'Backend\BlogController@forceDestroy',
-        'as'   => 'backend.blog.force-destroy'
-    ]);
-    //Route::resource('/backend/blog', 'Backend\BlogController');
-    Route::get('/backend/blog/destroy', 'Backend\BlogController@destroy')->name('backend.blog.destroy');
-    Route::get('/backend/blog/edit/{blog}', 'Backend\BlogController@edit')->name('backend.blog.edit');
-    Route::put('/backend/blog/update/{blog}', 'Backend\BlogController@update')->name('backend.blog.update');
+	Route::put('/blog/restore/{blog}', [
+		'uses' => 'BlogController@restore',
+		'as'   => 'blog.restore'
+	]);
+	Route::delete('/blog/force-destroy/{blog}', [
+		'uses' => 'BlogController@forceDestroy',
+		'as'   => 'blog.force-destroy'
+	]);
+	//Route::resource('/blog', 'BlogController');
+	Route::get('/blog/destroy', 'BlogController@destroy')->name('blog.destroy');
+	Route::get('/blog/edit/{blog}', 'BlogController@edit')->name('blog.edit');
+	Route::put('/blog/update/{blog}', 'BlogController@update')->name('blog.update');
 
-    Route::get('/backend/categories/create', [
-        'uses' => 'Backend\CategoriesController@create',
-        'as' => 'backend.categories.create'
-    ]);
+	Route::get('/categories/create', [
+		'uses' => 'CategoriesController@create',
+		'as' => 'categories.create'
+	]);
 
-    Route::get('/backend/categories/destroy', 'Backend\CategoriesController@destroy')->name('backend.categories.destroy');
-    Route::get('/backend/categories/edit/{blog}', 'Backend\CategoriesController@edit')->name('backend.categories.edit');
-    Route::put('/backend/categories/update/{blog}', 'Backend\CategoriesController@update')->name('backend.categories.update');
-
-
-    Route::get('/backend/users/confirm/{users}', [
-        'uses' => 'Backend\UsersController@confirm',
-        'as' => 'backend.users.confirm'
-    ]);
-    //Route::resource('/backend/users', 'Backend\UsersController');
-    Route::get('/users/create', 'UsersController@create')->name('users.create');
-    Route::get('/backend/users/destroy', 'Backend\UsersController@destroy')->name('backend.users.destroy');
-    Route::get('/backend/users/edit/{blog}', 'Backend\UsersController@edit')->name('backend.users.edit');
-    Route::put('/backend/users/update/{blog}', 'Backend\UsersController@update')->name('backend.users.update');
-    Route::post('/users/store', 'UsersController@store')->name('users.store');
-
-    Route::get('/users', [
-        'uses' => 'UsersController@index',
-        'as'   => 'users.index'
-    ]);
-
-    Route::get('/backend/categories/search', [
-        'uses' => 'Backend\CategoriesController@search',
-        'as'   => 'backend.categories.search'
-    ]);
-
-    Route::get('/backend/categories', [
-        'uses' => 'Backend\CategoriesController@index',
-        'as'   => 'backend.categories.index'
-    ]);
-
-    Route::get('/backend/categoriessearch/search', [
-        'uses' => 'Backend\CategoriesController@search',
-        'as'   => 'backend.categories.search'
-    ]);
+	Route::get('/categories/destroy', 'CategoriesController@destroy')->name('categories.destroy');
+	Route::get('/categories/edit/{blog}', 'CategoriesController@edit')->name('categories.edit');
+	Route::put('/categories/update/{blog}', 'CategoriesController@update')->name('categories.update');
 
 
-    Route::get('/backend/categoriessearch/search', 'Backend\CategoriesController@search');
+	Route::get('/users/confirm/{users}', [
+		'uses' => 'UsersController@confirm',
+		'as' => 'users.confirm'
+	]);
+	//Route::resource('/users', 'UsersController');
+	Route::get('/users/create', 'UsersController@create')->name('users.create');
+	Route::get('/users/destroy', 'UsersController@destroy')->name('users.destroy');
+	Route::get('/users/store', 'UsersController@store')->name('users.store');
+	Route::get('/users/edit/{blog}', 'UsersController@edit')->name('users.edit');
+	Route::put('/users/update/{blog}', 'UsersController@update')->name('users.update');
 
-    //Departments
-    //Route::resource('/backend/departments', 'Backend\DepartmentController');
-    Route::get('/backend/departments/destroy', 'Backend\DepartmentController@destroy')->name('backend.departments.destroy');
-    Route::get('/backend/departments/edit/{blog}', 'Backend\DepartmentController@edit')->name('backend.departments.edit');
-    Route::put('/backend/departments/update/{blog}', 'Backend\DepartmentController@update')->name('backend.departments.update');
+	Route::get('/users', [
+		'uses' => 'UsersController@index',
+		'as'   => 'users.index'
+	]);
 
-    Route::get('/backend/departments', [
-        'uses' => 'Backend\DepartmentController@index',
-        'as'   => 'backend.departments.index'
-    ]);
+	Route::get('/categories/search', [
+		'uses' => 'CategoriesController@search',
+		'as'   => 'categories.search'
+	]);
 
-    Route::get('/backend/categories', [
-        'uses' => 'Backend\CategoriesController@index',
-        'as'   => 'backend.categories.index'
-    ]);
+	Route::get('/categories', [
+		'uses' => 'CategoriesController@index',
+		'as'   => 'categories.index'
+	]);
 
-    //Designations
-    Route::get('/backend/designations/search', [
-        'uses' => 'Backend\Designations@search',
-        'as'   => 'backend.designations.search'
-    ]);
-    //Route::resource('/backend/designations', 'Backend\Designations'); 
+	Route::get('/categoriessearch/search', [
+		'uses' => 'CategoriesController@search',
+		'as'   => 'categories.search'
+	]);
 
-    Route::get('/backend/designations/create', 'Backend\Designations@create')->name('backend.designations.create');
-    Route::get('/backend/designations/destroy', 'Backend\Designations@destroy')->name('backend.designations.destroy');
-    Route::get('/backend/designations/edit/{blog}', 'Backend\Designations@edit')->name('backend.designations.edit');
-    Route::put('/backend/designations/update/{blog}', 'Backend\Designations@update')->name('backend.designations.update');
 
-    Route::get('/designations', [
-        'uses' => 'Designations@index',
-        'as'   => 'backend.designations'
-    ]);
+	Route::get('/categoriessearch/search', 'CategoriesController@search');
 
-    //JobPOst
-    //Route::resource('/backend/jobposts', 'Backend\JobPosts'); 
-    Route::get('/backend/jobposts/create', 'Backend\JobPosts@create')->name('backend.jobposts.create');
-    Route::get('/backend/jobposts/show', 'Backend\JobPosts@show')->name('backend.jobposts.show');
-    Route::get('/backend/jobposts/destroy', 'Backend\JobPosts@destroy')->name('backend.jobposts.destroy');
-    Route::get('/backend/jobposts/edit/{blog}', 'Backend\JobPosts@edit')->name('backend.jobposts.edit');
-    Route::put('/backend/jobposts/update/{blog}', 'Backend\JobPosts@update')->name('backend.jobposts.update');
-    Route::get('/backend/jobposts/store', 'Backend\JobPosts@store')->name('backend.jobposts.store');
+	//Departments
+	//Route::resource('/departments', 'DepartmentController');
+	Route::get('/departments/destroy', 'DepartmentController@destroy')->name('departments.destroy');
+	Route::get('/departments/edit/{blog}', 'DepartmentController@edit')->name('departments.edit');
+	Route::put('/departments/update/{blog}', 'DepartmentController@update')->name('departments.update');
 
+	Route::get('/departments', [
+		'uses' => 'DepartmentController@index',
+		'as'   => 'departments.index'
+	]);
+
+	Route::get('/categories', [
+		'uses' => 'CategoriesController@index',
+		'as'   => 'categories.index'
+	]);
+
+	//Designations
+	Route::get('/designations/search', [
+		'uses' => 'Designations@search',
+		'as'   => 'designations.search'
+	]);
+	//Route::resource('/designations', 'Designations'); 
+
+	Route::get('/designations/create', 'Designations@create')->name('designations.create');
+	Route::get('/designations/destroy', 'Designations@destroy')->name('designations.destroy');
+	Route::get('/designations/edit/{blog}', 'Designations@edit')->name('designations.edit');
+	Route::put('/designations/update/{blog}', 'Designations@update')->name('designations.update');
+
+	Route::get('/designations', [
+		'uses' => 'Designations@index',
+		'as'   => 'designations'
+	]);
+
+	//JobPOst
+	//Route::resource('/jobposts', 'JobPosts'); 
+	Route::get('/jobposts/create', 'JobPosts@create')->name('jobposts.create');
+	Route::get('/jobposts/show', 'JobPosts@show')->name('jobposts.show');
+	Route::get('/jobposts/destroy', 'JobPosts@destroy')->name('jobposts.destroy');
+	Route::get('/jobposts/edit/{blog}', 'JobPosts@edit')->name('jobposts.edit');
+	Route::put('/jobposts/update/{blog}', 'JobPosts@update')->name('jobposts.update');
+	Route::get('/jobposts/store', 'JobPosts@store')->name('jobposts.store');
 
 
 
 
-    Route::get('/backend/jobposts/search', [
-        'uses' => 'Backend\JobPosts@search',
-        'as'   => 'backend.jobposts.search'
-    ]);
 
-    Route::get('/backend/jobposts', [
-        'uses' => 'Backend\JobPosts@index',
-        'as'   => 'backend.jobposts.index'
-    ]);
+	Route::get('/jobposts/search', [
+		'uses' => 'JobPosts@search',
+		'as'   => 'jobposts.search'
+	]);
 
-    Route::get('/backend/editjobcategory/{jobid}/{postid}', [
-        'uses' => 'Backend\JobPosts@editjobcategory',
-        'as'   => 'backend.jobposts.editjobcategory'
-    ]);
-    Route::put('/backend/updatejobcategory/{jobid}', [
-        'uses' => 'Backend\JobPosts@updatejobcategory',
-        'as'   => 'backend.jobposts.updatejobcategory'
-    ]);
+	Route::get('/jobposts', [
+		'uses' => 'JobPosts@index',
+		'as'   => 'jobposts.index'
+	]);
+
+	Route::get('/editjobcategory/{jobid}/{postid}', [
+		'uses' => 'JobPosts@editjobcategory',
+		'as'   => 'jobposts.editjobcategory'
+	]);
+	Route::put('/updatejobcategory/{jobid}', [
+		'uses' => 'JobPosts@updatejobcategory',
+		'as'   => 'jobposts.updatejobcategory'
+	]);
+
 
 
 
 });
-
-// End
-
-
-
-
 Route::get('/site', [
     'uses' => 'SiteController@index',
     'as'   => 'site'
@@ -241,9 +235,6 @@ Route::get('/form/apply', [
     'as'   => 'form.apply'
 ]);
 
-Route::get('/department', 'FormController@department');
-
-Route::get('/advertisement', 'FormController@advertisement');
 
 Route::get('loginc','LogincController@index');
 

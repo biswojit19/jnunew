@@ -10,7 +10,7 @@
             
             <td> 
                 {{ Form::submit('Search', array('class'=>'btn btn-default')) }}  
-                  <a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> Refresh</a>
+                  <a href="{{ route('categories.index') }}"><i class="fa fa-circle-o"></i> Refresh</a>
 
             </td>
 
@@ -45,7 +45,7 @@
                 <td>{{ $category->posts->count() }}</td>
                  <td>
                     {!! Form::open(['method' => 'DELETE', 'route' => ['backend.categories.destroy', $category->id]]) !!}
-                        <a href="{{ route('backend.categories.edit', $category->id) }}" class="btn btn-xs btn-default">
+                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-xs btn-default">
                             <i class="fa fa-edit"></i>
                         </a>
                         @if($category->id == config('cms.default_category_id'))

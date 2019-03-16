@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.jobposts.index') }}">Job Posts</a></li>
+          <li><a href="{{ route('jobposts.index') }}">Job Posts</a></li>
           <li class="active">Edit Job Posts</li>
         </ol>
       </section>
@@ -34,7 +34,7 @@
                         <div class="col-md-2"> <a class="btn btn-xs btn-primary" href="">All Applicants Summary</a></div>   
                         <div class="col-md-2"> <a class="btn btn-xs btn-success" href="">View Shortlist Candidates</a></div>   
                         <div class="col-md-2"> <a class="btn btn-xs btn-danger" href="">Print Applicants Summary</a></div> 
-                        <div class="col-md-2"> <a href="{{ route('backend.jobposts.edit', $jobpost->id) }}" class="btn btn-xs btn-primary">Update </a></div>
+                        <div class="col-md-2"> <a href="{{ route('jobposts.edit', $jobpost->id) }}" class="btn btn-xs btn-primary">Update </a></div>
                       </div>
                   <table id="w0" class="table table-striped table-bordered detail-view">
                     <tbody>
@@ -70,7 +70,7 @@
           </div>
           <div class="panel-body">
               <div class="panel-control">
-                  <a class="pull-right btn btn-warning" href="{{ route('backend.jobposts.editjobcategory', ['jobid'=>$jobpost->id,'postid'=>$jobpost->post] ) }}">Update</a>
+                  <a class="pull-right btn btn-warning" href="{{ route('jobposts.editjobcategory', ['jobid'=>$jobpost->id,'postid'=>$jobpost->post] ) }}">Update</a>
                   <button type="button" id="btn-cal-stat-jobpost" class="pull-right btn btn-danger " data-url="/jnurecRC57admin/index.php/postjobcategory/calstat" data-id="198">Calculate Statistics </button>
               </div>
              

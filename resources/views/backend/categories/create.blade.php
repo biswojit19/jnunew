@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.categories.index') }}">Categories</a></li>
+          <li><a href="{{ route('categories.index') }}">Categories</a></li>
           <li class="active">Add new</li>
         </ol>
       </section>
@@ -25,7 +25,7 @@
           <div class="row">
               {!! Form::model($category, [
                   'method' => 'POST',
-                  'route'  => 'backend.categories.store',
+                  'route'  => 'categories.store',
                   'files'  => TRUE,
                   'id' => 'category-form'
               ]) !!}

@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.departments.index') }}">Departments</a></li>
+          <li><a href="{{ route('departments.index') }}">Departments</a></li>
           <li class="active">Add new</li>
         </ol>
       </section>
@@ -25,7 +25,7 @@
           <div class="row">
               {!! Form::model($department, [
                   'method' => 'POST',
-                  'route'  => 'backend.departments.store',
+                  'route'  => 'departments.store',
                   'files'  => TRUE,
                   'id' => 'department-form'
               ]) !!}

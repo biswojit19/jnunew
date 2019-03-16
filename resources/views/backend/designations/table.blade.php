@@ -1,4 +1,4 @@
-  {!! Form::open(['method' => 'GET','id' => 'form', 'route' => ['backend.designations.search']]) !!}
+  {!! Form::open(['method' => 'GET','id' => 'form', 'route' => ['designations.search']]) !!}
 <table>
     
 
@@ -8,7 +8,7 @@
             <td><input type="text" class="form-control" name="code" value="{{old('code')}}"  placeholder="Code"></td>            
             <td> 
                 {{ Form::submit('Search', array('class'=>'btn btn-default')) }}  
-            <a href="{{ route('backend.designations') }}"><i class="fa fa-circle-o"></i> Refresh</a>
+            <a href="{{ route('designations') }}"><i class="fa fa-circle-o"></i> Refresh</a>
             </td>
 
         </tr>
@@ -37,8 +37,8 @@
                 <td>{{ $category->code }}</td>
                 <td> <td>{{ $category->status == 1 ? 'Active': 'Inactive' }}</td></td> 
                  <td>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['backend.designations.destroy', $category->id]]) !!}
-                        <a href="{{ route('backend.designations.edit', $category->id) }}" class="btn btn-xs btn-default">
+                    {!! Form::open(['method' => 'DELETE', 'route' => ['designations.destroy', $category->id]]) !!}
+                        <a href="{{ route('designations.edit', $category->id) }}" class="btn btn-xs btn-default">
                             <i class="fa fa-edit"></i>
                         </a>
                          <button onclick="return confirm('Are you sure?');" type="submit" class="btn btn-xs btn-danger">

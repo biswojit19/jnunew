@@ -105,7 +105,7 @@ class UsersController extends Controller
                 'permissions' => $permissions,
             ];
 
-            return view('admin.users.users_edit')->with($params);
+            return view('backend.users.edit')->with($params);
         } catch (ModelNotFoundException $ex) {
             if ($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');

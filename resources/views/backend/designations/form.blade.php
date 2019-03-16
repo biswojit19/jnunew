@@ -34,7 +34,7 @@
     <!-- /.box-body -->
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">{{ $category->exists ? 'Update' : 'Save' }}</button>
-        <a href="{{ route('backend.designations.index') }}" class="btn btn-default">Cancel</a>
+        <a href="{{ route('designations') }}" class="btn btn-default">Cancel</a>
     </div>
   </div>
   <!-- /.box -->

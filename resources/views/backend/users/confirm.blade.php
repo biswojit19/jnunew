@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.users.index') }}">Users</a></li>
+          <li><a href="{{ route('users.index') }}">Users</a></li>
           <li class="active">Delete Confirmation</li>
         </ol>
       </section>
@@ -52,7 +52,7 @@
                       </div>
                       <div class="box-footer">
                           <button type="submit" class="btn btn-danger">Confirm Deletion</button>
-                          <a href="{{ route('backend.users.index') }}" class="btn btn-default">Cancel</a>
+                          <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
                       </div>
                   </div>
               </div>

@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.departments.index') }}">Departments</a></li>
+          <li><a href="{{ route('departments.index') }}">Departments</a></li>
           <li class="active">Edit Department</li>
         </ol>
       </section>
@@ -25,7 +25,7 @@
           <div class="row">
               {!! Form::model($department, [
                   'method' => 'PUT',
-                  'route'  => ['backend.departments.update', $department->id],
+                  'route'  => ['departments.update', $department->id],
                   'files'  => TRUE,
                   'id' => 'post-form'
               ]) !!}

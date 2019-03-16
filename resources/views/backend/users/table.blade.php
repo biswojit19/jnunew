@@ -13,7 +13,7 @@
 
             <tr>
                 <td>
-                    <a href="{{ route('backend.users.edit', $user->id) }}" class="btn btn-xs btn-default">
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-default">
                         <i class="fa fa-edit"></i>
                     </a>
                     @if($user->id == config('cms.default_user_id') || $user->id == $currentUser->id)
@@ -21,7 +21,7 @@
                             <i class="fa fa-times"></i>
                         </button>
                     @else
-                        <a href="{{ route('backend.users.confirm', $user->id) }}" class="btn btn-xs btn-danger">
+                        <a href="{{ route('users.confirm', $user->id) }}" class="btn btn-xs btn-danger">
                             <i class="fa fa-times"></i>
                         </a>
                     @endif

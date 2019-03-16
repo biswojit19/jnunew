@@ -15,7 +15,7 @@
           <li>
               <a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
           </li>
-          <li><a href="{{ route('backend.jobposts.index') }}">Job Posts</a></li>
+          <li><a href="{{ route('jobposts.index') }}">Job Posts</a></li>
           <li class="active">Edit Categorywise Vacancies & Fee</li>
         </ol>
       </section>
@@ -108,7 +108,7 @@
                   </div>
                     <div class="box-footer text-center">
                       <button type="submit" class="btn btn-primary">{{ $jobposts->exists ? 'Update' : 'Save' }}</button>
-                      <a href="{{ route('backend.jobposts.index') }}" class="btn btn-default">Cancel</a>
+                      <a href="{{ route('jobposts.index') }}" class="btn btn-default">Cancel</a>
                   </div>
                 </div>
                  
