@@ -64,7 +64,7 @@
         <div class="form-group col-md-4 {{ $errors->has('startDate') ? 'has-error' : '' }}">
                 {!! Form::label('startDate', 'Start Date') !!}
                 <div class='input-group date' id='datetimepicker1'>
-                    {!! Form::text('startDate', $jobpost->exists ? null : ['class' => 'form-control', 'placeholder' => 'Y-m-d']) !!}
+                    {!! Form::text('startDate',  $jobpost->exists ? $jobpost->startDate :null,  ['class' => 'form-control', 'placeholder' => 'Y-m-d']) !!}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -78,7 +78,7 @@
           <div class="form-group col-md-4 {{ $errors->has('startingTime') ? 'has-error' : '' }}">
                 {!! Form::label('startingTime', 'Satrting Time') !!}
                 <div class='input-group date' id='datetimepicker2'>
-                    {!! Form::text('startingTime', $jobpost->exists ? null : ['class' => 'form-control', 'placeholder' => 'HH:mm:ss']) !!}
+                    {!! Form::text('startingTime', $jobpost->exists ? $jobpost->startingTime :null,  ['class' => 'form-control', 'placeholder' => 'HH:mm:ss']) !!}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
@@ -92,7 +92,7 @@
           <div class="form-group col-md-4 {{ $errors->has('closeDate') ? 'has-error' : '' }}">
                 {!! Form::label('closeDate', 'Close Date') !!}
                 <div class='input-group date' id='datetimepicker3'>
-                    {!! Form::text('closeDate', $jobpost->exists ? null : ['class' => 'form-control', 'placeholder' => 'Y-m-d']) !!}
+                    {!! Form::text('closeDate', $jobpost->exists ? $jobpost->closeDate :null,  ['class' => 'form-control', 'placeholder' => 'Y-m-d']) !!}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -106,7 +106,7 @@
           <div class="form-group col-md-4 {{ $errors->has('closingTime') ? 'has-error' : '' }}">
                 {!! Form::label('closingTime', 'Satrting Time') !!}
                 <div class='input-group date' id='datetimepicker4'>
-                    {!! Form::text('closingTime', $jobpost->exists ? null : ['class' => 'form-control', 'placeholder' => 'HH:mm:ss']) !!}
+                    {!! Form::text('closingTime',  $jobpost->exists ? $jobpost->closingTime :null,  ['class' => 'form-control', 'placeholder' => 'HH:mm:ss']) !!}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
