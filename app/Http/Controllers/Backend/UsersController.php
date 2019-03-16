@@ -3,123 +3,171 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Permission;
 
-class UsersController extends BackendController
+class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //
+
+    public function __construct()
+    {
+        //$this->middleware('role:users');
+    }
+
+    // Index Page for Users
     public function index()
     {
-        $users      = User::orderBy('name')->paginate($this->limit);
-        $usersCount = User::count();
+        $users = User::paginate(10);
+        
+        $params = [
+            'title' => 'Users Listing',
+            'users' => $users,
+        ];
 
-        return view("backend.users.index", compact('users', 'usersCount'));
+        return view('admin.users.users_list')->with($params);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Create User Page
     public function create()
     {
-        $user = new User();
-        return view("backend.users.create", compact('user'));
+        $roles = Role::all();
+
+        $params = [
+            'title' => 'Create User',
+            'roles' => $roles,
+        ];
+
+        return view('admin.users.users_create')->with($params);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Requests\UserStoreRequest $request)
+    // Store New User
+    public function store(Request $request)
     {
-        $user = User::create($request->all());
-        $user->attachRole($request->role);
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+        ]);
 
-        return redirect("/backend/users")->with("message", "New user was created successfully!");
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        $role = Role::find($request->input('role_id'));
+
+        $user->attachRole($role);
+
+        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been created.");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Delete Confirmation Page
     public function show($id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+
+            $params = [
+                'title' => 'Confirm Delete Record',
+                'user' => $user,
+            ];
+
+            return view('admin.users.users_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Editing User Information Page
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        try {
+            $user = User::findOrFail($id);
 
-        return view("backend.users.edit", compact('user'));
-    }
+            //$roles = Role::all();
+            $roles = Role::with('permissions')->get();
+            $permissions = Permission::all();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Requests\UserUpdateRequest $request, $id)
-    {
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+            $params = [
+                'title' => 'Edit User',
+                'user' => $user,
+                'roles' => $roles,
+                'permissions' => $permissions,
+            ];
 
-        $user->detachRoles();
-        $user->attachRole($request->role);
-
-        return redirect("/backend/users")->with("message", "User was updated successfully!");
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Requests\UserDestroyRequest $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        $deleteOption = $request->delete_option;
-        $selectedUser = $request->selected_user;
-
-        if ($deleteOption == "delete") {
-            // delete user posts
-            $user->posts()->withTrashed()->forceDelete();
+            return view('admin.users.users_edit')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
         }
-        elseif ($deleteOption == "attribute") {
-            $user->posts()->update(['author_id' => $selectedUser]);
-        }
-
-        $user->delete();
-
-        return redirect("/backend/users")->with("message", "User was deleted successfully!");
     }
 
-    public function confirm(Requests\UserDestroyRequest $request, $id)
+    // Update User Information to DB
+    public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $users = User::where('id', '!=', $user->id)->pluck('name', 'id');
+        try {
+            $user = User::findOrFail($id);
 
-        return view("backend.users.confirm", compact('user', 'users'));
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $id,
+            ]);
+
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+
+            $user->save();
+
+            // Update role of the user
+            $roles = $user->roles;
+
+            foreach ($roles as $key => $value) {
+                $user->detachRole($value);
+            }
+
+            $role = Role::find($request->input('role_id'));
+
+            $user->attachRole($role);
+
+            // Update permission of the user
+            //$permission = Permission::find($request->input('permission_id'));
+            //$user->attachPermission($permission);
+
+            return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been updated.");
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
+    }
+
+    // Remove User from DB with detaching Role
+    public function destroy($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+
+            // Detach from Role
+            $roles = $user->roles;
+
+            foreach ($roles as $key => $value) {
+                $user->detachRole($value);
+            }
+
+            $user->delete();
+
+            return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been archived.");
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
     }
 }

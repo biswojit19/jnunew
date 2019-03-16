@@ -16,6 +16,10 @@ Route::get('/', [
     'as'   => 'site'
 ]);
 
+Route::get('/admin', function () {
+    return view('auth.login');
+});
+
 Route::get('/blog/{post}', [
     'uses' => 'BlogController@show',
     'as'   => 'blog.show'
@@ -44,13 +48,43 @@ Route::post('/blog/{post}/comments', [
     'as' => 'blog.comments'
 ]);
 
-Route::auth();
+//side controller
+
+Route::get('/side', [
+    'uses' => 'SideController@index',
+    'as'   => 'side'
+]);
+Route::get('/side/signup', [
+    'uses' => 'SideController@signup',
+    'as'   => 'side.signup'
+]);
+
+Route::post('/side/signup/store', [
+    'uses' => 'SideController@store',
+    'as'   => 'side.signup.store'
+]);
+
+
+Route::get('loginc','LogincController@index');
+
+
+
+
+
+Auth::routes();
 
 Route::get('/home', 'Backend\HomeController@index');
 Route::get('/edit-account', 'Backend\HomeController@edit');
 Route::put('/edit-account', 'Backend\HomeController@update');
 Route::get('/blog', 'Backend\BlogController@index')->name('blog');
 
+Route::get('/candidate', 'CandidateController@index')->name('candidate');
+
+
+// Administrator & SuperAdministrator Control Panel Routes
+Route::group(['prefix' => 'backend', 'middleware' => 'auth', 'middleware' => ['role:administrator|superadministrator'], 'namespace' => 'Backend'], function () {
+	
+	
 Route::put('/backend/blog/restore/{blog}', [
     'uses' => 'Backend\BlogController@restore',
     'as'   => 'backend.blog.restore'
@@ -79,6 +113,7 @@ Route::get('/backend/users/confirm/{users}', [
     'as' => 'backend.users.confirm'
 ]);
 //Route::resource('/backend/users', 'Backend\UsersController');
+Route::get('/backend/users/create', 'Backend\UsersController@create')->name('backend.users.create');
 Route::get('/backend/users/destroy', 'Backend\UsersController@destroy')->name('backend.users.destroy');
 Route::get('/backend/users/edit/{blog}', 'Backend\UsersController@edit')->name('backend.users.edit');
 Route::put('/backend/users/update/{blog}', 'Backend\UsersController@update')->name('backend.users.update');
@@ -134,9 +169,9 @@ Route::get('/backend/designations/destroy', 'Backend\Designations@destroy')->nam
 Route::get('/backend/designations/edit/{blog}', 'Backend\Designations@edit')->name('backend.designations.edit');
 Route::put('/backend/designations/update/{blog}', 'Backend\Designations@update')->name('backend.designations.update');
 
-Route::get('/backend/designations', [
-    'uses' => 'Backend\Designations@index',
-    'as'   => 'backend.designations.index'
+Route::get('/designations', [
+    'uses' => 'Designations@index',
+    'as'   => 'backend.designations'
 ]);
 
 //JobPOst
@@ -172,8 +207,8 @@ Route::put('/backend/updatejobcategory/{jobid}', [
 ]);
 
 
-//side controller
 
+});
 Route::get('/site', [
     'uses' => 'SiteController@index',
     'as'   => 'site'

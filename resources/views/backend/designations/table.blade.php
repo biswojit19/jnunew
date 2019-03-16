@@ -8,7 +8,7 @@
             <td><input type="text" class="form-control" name="code" value="{{old('code')}}"  placeholder="Code"></td>            
             <td> 
                 {{ Form::submit('Search', array('class'=>'btn btn-default')) }}  
-            <a href="{{ route('backend.designations.index') }}"><i class="fa fa-circle-o"></i> Refresh</a>
+            <a href="{{ route('backend.designations') }}"><i class="fa fa-circle-o"></i> Refresh</a>
             </td>
 
         </tr>

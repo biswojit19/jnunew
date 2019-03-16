@@ -14,6 +14,9 @@ return [
         'user' => [
             'profile' => 'r,u'
         ],
+		'candidate' => [
+            'profile' => 'r,u'
+        ],
     ],
     'permission_structure' => [
         'cru_user' => [
