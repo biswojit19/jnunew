@@ -14,42 +14,49 @@
                   <div class="col-md-9">
                      <div class="row" style="font-weight:normal">
                         <div class="table-responsive">
-                           <table class="table">
-                              <thead>
-                                 <tr class="danger">
-                                    <th>Posts</th>
-                                    <th>Application Start Date/Time</th>
-                                    <th>Application Close Date/Time</th>
-                                    <th>Total Post</th>
-                                 </tr>
-                                 <tr class="success">
-                                    <th>Assistant Professor</th>
-                                    <td>2017-12-30 Time: 09:00:00</td>
-                                    <td>2018-01-29 Time: 17:30:00</td>
-                                    <td>58</td>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <tr class="success">
-                                    <th>Associate Professor</th>
-                                    <td>2017-12-30 Time: 09:00:00</td>
-                                    <td>2018-01-29 Time: 17:30:00</td>
-                                    <td>26</td>
-                                 </tr>
-                                 <tr class="success">
-                                    <th>Professor</th>
-                                    <td>2017-12-30 Time: 09:00:00</td>
-                                    <td>2018-01-29 Time: 17:30:00</td>
-                                    <td>22</td>
-                                 </tr>
-                                 <tr class="info">
-                                    <td></td>
-                                    <td></td>
-                                    <th>Total: </th>
-                                    <td>106</td>
-                                 </tr>
-                              </tbody>
-                           </table>
+                        <table class="table">
+                           <thead>
+                             <tr class="danger">
+                              <th>Posts</th>
+                              <th>Application Start Date/Time</th>
+                              <th>Application Close Date/Time</th>
+                              <th>Total Post</th>
+                             </tr> 
+
+                            <!--  <tr class="success">
+                              <th>Assistant Professor</th>
+                              <td>2017-12-30 Time: 09:00:00</td>
+                              <td>2018-01-29 Time: 17:30:00</td>
+                              <td>58</td>
+                             </tr> -->
+                           </thead>
+                           <tbody>
+                              @php
+                                 $all_total_vacancy = 0;
+                              @endphp
+                               @foreach($jobposts as $jobpost)
+                                 
+                             <tr class="success">
+                               <td>{{ $jobpost->designations->name }}</td>
+                                    <td>{{ $jobpost->startDate }} {{$jobpost->startingTime}}</td>
+                                     <td>{{ $jobpost->closeDate }} {{$jobpost->closingTime}}</td>
+                              <td> 
+                                   00
+
+                                 
+                              </td> 
+                             </tr> 
+                              @endforeach
+                           
+                             <tr class="info">
+                              
+                              <td></td>
+                              <td></td>
+                              <th>Total: </th>
+                              <td>{{$all_total_vacancy}}</td>
+                             </tr> 
+                           </tbody>
+                        </table>
                            <p style="margin-bottom: 0.0000pt; text-align: justify; text-justify: inter-ideograph;"><span style="font-family: 'Verdana'; font-size: 11.0000pt;">A number of faculty positions at the level of Professor, Associate Professor and Assistant Professor are available in various Schools/Centres of the University. &nbsp;Candidates with good academic record, teaching and research experience and working in related areas, are encouraged to apply. &nbsp;University also solicits applications from candidates with research interests that are interdisciplinary. At present, the number of vacancies at each level are as under:</span></p>
                            <br>
                            <table align="center" class="table table-striped" style="border-collapse: collapse; width: 473.2000pt;">
@@ -229,7 +236,7 @@
 	  <div class="panel-footer">
 		<ul>
 		   <li>
-			  <h4> <a href="/signup">New User Registration</a></h4>
+			  <h4> <a href="/site/signup">New User Registration</a></h4>
 		   </li>
 		   <li>
 			  <h4><a href="/request-password-reset">Reset Password</a> </h4>

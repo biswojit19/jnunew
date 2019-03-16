@@ -16,10 +16,11 @@ class SiteController extends Controller
 {
     public function index()
     {
-    	//$jobposts      = JobPost::distinct()->select('post','startDate','startingTime','closeDate','closingTime','post')->groupby('post')->get();
-    	//$totalVacancy = PostJobCategory::groupby('post')->sum('vacancy');
+    	$jobposts      = JobPost::distinct()->select('post','startDate','startingTime','closeDate','closingTime','post')->groupby('post')->get();
+    	$totalVacancy = PostJobCategory::groupby('post')->sum('vacancy');
     	//dd($jobposts->post);
-        return view("site.index");  //compact('jobposts')
+        return view("site.index",compact('jobposts'));  
+        
     }
     public function signup()
     {

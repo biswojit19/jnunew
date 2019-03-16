@@ -174,22 +174,38 @@ Route::put('/backend/updatejobcategory/{jobid}', [
 
 //side controller
 
-Route::get('/side', [
-    'uses' => 'SideController@index',
-    'as'   => 'side'
+Route::get('/site', [
+    'uses' => 'SiteController@index',
+    'as'   => 'site'
 ]);
-Route::get('/side/signup', [
-    'uses' => 'SideController@signup',
-    'as'   => 'side.signup'
+Route::get('/site/signup', [
+    'uses' => 'SiteController@signup',
+    'as'   => 'site.signup'
 ]);
 
-Route::post('/side/signup/store', [
-    'uses' => 'SideController@store',
-    'as'   => 'side.signup.store'
+Route::post('/site/signup/store', [
+    'uses' => 'SiteController@store',
+    'as'   => 'site.signup.store'
+]);
+
+// form controller
+Route::get('/form/eligibility', [
+    'uses' => 'FormController@index',
+    'as'   => 'form.eligibility'
+]);
+
+Route::get('/form/apply', [
+    'uses' => 'FormController@apply',
+    'as'   => 'form.apply'
 ]);
 
 
 Route::get('loginc','LogincController@index');
+
+Route::get('/logout', function(){
+   Auth::logout();
+   return Redirect::to('login');
+});
 
 
 
