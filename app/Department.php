@@ -17,6 +17,10 @@ class Department extends Model
     {
         return $this->belongsTo(JobPost::class);
     }
+    public function profiledetails()
+    {
+        return $this->belongsTo(ProfileDetails::class);
+    }
 
 
     public function getRouteKeyName()

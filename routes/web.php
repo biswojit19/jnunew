@@ -235,6 +235,28 @@ Route::get('/form/apply', [
     'as'   => 'form.apply'
 ]);
 
+Route::get('/form/eligibilitylist', [
+    'uses' => 'FormController@eligibilitylist',
+    'as'   => 'form.eligibilitylist'
+]);
+
+Route::get('/form/formvalidate/{id}', [
+    'uses' => 'FormController@formvalidate',
+    'as'   => 'form.formvalidate'
+]);
+
+Route::get('/form/edit/{parameter}', 'FormController@formedit');
+
+Route::get('/department','FormController@department');
+Route::get('/advertisement','FormController@advertisement');
+Route::get('/details','FormController@getShowUploadInfo');
+
+Route::post('/store', [
+    'uses' => 'FormController@store',
+    'as'   => 'form.store'
+]);
+
+
 
 Route::get('loginc','LogincController@index');
 

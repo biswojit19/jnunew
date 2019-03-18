@@ -36,7 +36,7 @@ body{
                     </div>
                     <div class="collapse navbar-collapse"  id="navcol-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/jnurecRC57/index.php/site/index" style="font-weight:bold;">JOB PORTAL</a></li>
+                            <li><a href="/form/eligibilitylist" style="font-weight:bold;">JOB PORTAL</a></li>
                                                     <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -44,7 +44,19 @@ body{
                                         <li><a href="/jnurecRC57/index.php/site/faq">FAQ</a></li>
                                 </ul>
                             </li>
-							<li><a style="padding: .2em .2em .2em .2em;" class="btn btn-default action-button" role="button"  href=/jnurecRC57/index.php/site/index>Login</a> <a style="padding: .2em .2em .2em .2em;" class="btn btn-default action-button" role="button"  href=/jnurecRC57/index.php/site/signup>Registration</a></li>
+							<li>
+                                @if (!Auth::guest())
+                                     
+                                      <div class="pull-right">
+                                        <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                @else
+                                  
+                                @endif
+
+
+                               
+                            </li>
                                               </ul>
                     </div>
                 </div>

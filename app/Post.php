@@ -38,6 +38,7 @@ class Post extends Model
     {
         $this->comments()->create($data);
     }
+    
 
     public function createTags($str)
     {

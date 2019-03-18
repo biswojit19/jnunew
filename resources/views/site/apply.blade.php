@@ -12,6 +12,13 @@
                   <h4 style="text-align: center; font-weight: bold;">JAWAHARLAL NEHRU FACULTY RECRUITMENT PORTAL</h4>
                </div>
                <!-- Start -->
+               <!--  {!! Form::model([
+                  'method' => 'POST',
+                  'action'  => 'form.store',
+                  'files'  => TRUE,
+                  'id' => 'applyform'
+                ]) !!} -->
+                {!! Form::open(array('route' => 'form.store', 'method' => 'POST' )) !!}
                 <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -57,10 +64,23 @@
 
                                </div>
 
+                               <div class="row" id="applydiv">
+      
+                                  <div class="col-md-8" id="notice1"></div>
+                                  <div class="col-md-4">
+                                  <label id="notice" style="color:red;"></label>
+                                  <div class="row text-center">
+                                            <div id="apply" class="form-group" style="margin-right:2%">
+                                                
+                                            </div>
+                                        </div>
+                                  </div>
+                                </div>
+
                         </div>
                        
              </div>
-
+              {!! Form::close() !!}
                <!-- End -->
               
             </div>
