@@ -48,19 +48,19 @@ Route::post('/blog/{post}/comments', [
     'as' => 'blog.comments'
 ]);
 
-//side controller
+//site controller
 
-Route::get('/side', [
-    'uses' => 'SideController@index',
-    'as'   => 'side'
+Route::get('/site', [
+    'uses' => 'SiteController@index',
+    'as'   => 'site'
 ]);
-Route::get('/side/signup', [
-    'uses' => 'SideController@signup',
+Route::get('/site/signup', [
+    'uses' => 'SiteController@signup',
     'as'   => 'side.signup'
 ]);
 
-Route::post('/side/signup/store', [
-    'uses' => 'SideController@store',
+Route::post('/site/signup/store', [
+    'uses' => 'SiteController@store',
     'as'   => 'side.signup.store'
 ]);
 

@@ -156,6 +156,44 @@ class FormController extends Controller
         //
     }
 
+public function formedit1($id)
+    {
+        $ide = Crypt::decrypt($id);
+
+        
+		
+		$formId =  Crypt::decrypt($id);
+		$model = ProfileDetails::with('departments')->with('jobposts')->with('categories')->where('id',$ide)->first();
+		$categories = Category::get();
+		$userId = $model->userId;
+		$category = $model->category;
+		$acmodel = Academic::where(['profileId' => $formId, 'userId' => $userId])->first();
+		//dd($model);
+		//$row=count($acmodel);
+		if($acmodel == null){
+			$acmodel = new Academic();
+		}
+		$teachings = TeachingExp::where(['userId' =>$userId, 'profileId' => $formId])->orderBy('id', 'ASC')->get();
+		$teachings1 = new TeachingExp();
+		$teachingKey = $formId;
+		$articles = ResearchArticle::where(['userId' => $userId, 'profileId' => $formId])->orderBy('pubType','ASC')->orderBy('id', 'ASC')->get();
+		$articles1 = new ResearchArticle();
+		$publications = Researchpublication::where(['userId' =>$userId, 'profileId' => $formId])->orderBy('type','ASC')->orderBy('id', 'ASC')->get();
+		$publications1 = new Researchpublication();
+		$publicationKey = $formId;
+		$rguidance = null;
+		$rguidance1 = null;		
+		if($model->post != 1){
+			$rguidance = Researchguidance::where(['userId' => $userId, 'profileId' => $formId])->orderBy('id' , 'ASC')->first();
+			$rguidance1 = new Researchguidance();   
+			$appKey = $formId;    
+		}		
+		//dd($model);
+		
+		
+         return view("site.formedit1", compact('model','formId','userId','acmodel','teachings','teachings1','teachingKey','articles','articles1','publications','publications1','publicationKey','rguidance','rguidance1','categories'));
+
+    }
     /**
      * Show the form for editing the specified resource.
      *

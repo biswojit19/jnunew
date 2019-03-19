@@ -26,6 +26,10 @@
                                         </div>
                                     </div>
                          </div>
+						 </div> </div>
+						 
+						 
+			<div class="col-md-4">			 
                          <div class="panel panel-success">
                 <div class="panel-heading" style="font-weight:bold" align="center">
                     New Account
@@ -34,7 +38,7 @@
                     <div class="col-md-12">
                          {!! Form::model($user, [
                                   'method' => 'POST',
-                                  'route'  => 'side.signup.store',
+                                  'route'  => 'site.signup.store',
                                   'files'  => TRUE,
                                   'id'     => 'user-form'
                         ]) !!}
@@ -82,12 +86,7 @@
                                     <span class="help-block">{{ $errors->first('mobile') }}</span>
                                 @endif
                             </div>
-                             <div class="form-group {{ $errors->has('role') ? 'has-error' : '' }}">
-                                {!! Form::label('role') !!}
-                                <select class="form-control" id="role" name="role">
-                                <option value="4">user</option>
-                                </select>
-                            </div>
+                            
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Register</button>
                             </div>
@@ -97,10 +96,9 @@
                 </div>
             </div>
 
-                  </div>
             </div>
 
-            @include('layouts.sidebar')
+           
         </div>
     </div>
 

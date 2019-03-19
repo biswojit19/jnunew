@@ -24,7 +24,8 @@ class SiteController extends Controller
     }
     public function signup()
     {
-        return view("site.signup");
+		$user = new User();
+        return view("site.signup", compact('user'));
     }
     public static function totalVacancy($id)
     {
