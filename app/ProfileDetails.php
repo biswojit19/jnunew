@@ -13,6 +13,7 @@ class ProfileDetails extends Authenticatable
 
     protected $fillable = ['post', 'userId','department','mobile','advt','jobId','transaction','transStatus', 'payDate','payStatus','section1','section2','section3','section4','section5','section6','section7','section9','feedback_code','check_pay','no_of_pay','elligible_status', 'formNo'];
     protected $table = 'profiledetails';
+    
 
     public function departments()
     {

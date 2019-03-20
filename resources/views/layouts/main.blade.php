@@ -10,7 +10,8 @@
     <meta name="csrf-token" content="RjVzdjd1YlAfckAZeBYYBz5MCRQaPCckEGcgRnMgVgN/YhBCQTIpGg==">
         <title>Login</title>
         <link href="/css/bootstrap.css" rel="stylesheet">
-
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css"> 
 <link href="/css/site.css" rel="stylesheet">		
 		<style>
 		.header-blue{
@@ -73,7 +74,9 @@ body{
         </div>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.js"></script>
-         <script src="/js/form.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+        <script src="/js/form.js"></script>
 
    </body>
 </html>

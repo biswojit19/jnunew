@@ -87,14 +87,37 @@ function showapply(cod){
 }
 
 
-//  $(document).ready(function(){
-//  $("#savebutton").click(function(e)({
-//    $("#applyform").submit();
-//  )};
-// )};
+ function netfunc(){
+	 var k = $("#academic-net").val();
+	 //alert(k);
+           if(k == 4){
+                $('#pns-net-subject').hide();
+                $('#pns-net-certificate').hide();
+                $('#pns-net-exe-block').show();
+		   }else if(k == 5){
+			   $('#pns-net-subject').hide();
+                $('#pns-net-certificate').hide();
+                $('#pns-net-exe-block').hide();
+		   }else {
+			    $('#pns-net-subject').show();
+                $('#pns-net-certificate').show();
+		   }
+   
+          
+  }
 
-// $("#savebutton").onclick(function()
-// { 
-// 	alert(1);
+  function percen_grade(){
 
-// });
+	var pertype = document.getElementById("academic-pgperna").value;
+	var per_grade = document.getElementById("academic-pgpercentage").value;
+	
+	if(pertype == 2 && per_grade > 10 ){
+		alert("Overall Percentage/Final Grade Points Avg.(FGPA) Can't be greater than 10.");
+		document.getElementById("academic-pgpercentage").value="";
+	}	
+}
+
+$('#phdaward').datetimepicker({
+            format: 'YYYY-MM-DD',
+            showClear: true
+        }); 

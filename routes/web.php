@@ -256,6 +256,15 @@ Route::post('/store', [
     'as'   => 'form.store'
 ]);
 
+Route::post('/storecategory', [
+    'uses' => 'FormController@storeCategory',
+    'as'   => 'form.storecategory'
+]);
+
+Route::post('/storeacademic', [
+    'uses' => 'FormController@storeAcademic',
+    'as'   => 'form.storeacademic'
+]);
 
 
 Route::get('loginc','LogincController@index');

@@ -15,6 +15,8 @@ use App\ProfileDetails;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use Crypt;
+use App\NetSubject;
+use App\Academic;
 
 
 class FormController extends Controller
@@ -98,6 +100,86 @@ class FormController extends Controller
            
 
     }
+
+      public function storeCategory(Request $request)
+    {
+            
+            $data = $request->all();
+            $id = $request->formid;
+            $data = request()->except(['_token','formid']);
+
+            $data['category'] = $request->category;
+            $data['section1'] = 0;
+            $data['section2'] = 0;
+            $data['section3'] = 0;
+            $data['section4'] = 0;
+            $data['section5'] = 0;
+            $data['section6'] = 0;
+            $data['section7'] = 0;
+            $data['section8'] = 0;
+            $data['section9'] = 0;
+           
+            ProfileDetails::where('id', $id)->update($data);
+            $ide = Crypt::encrypt($id);
+
+            return redirect("/form/edit/$ide"); 
+
+    }
+
+      public function storeAcademic(Request $request)
+    {
+            
+
+            Academic::where('userId', $request->userId)->where('profileId', $request->formid)->delete();
+            $currentUser = Auth::user();
+            $data = $request->all();          
+            $data = request()->except(['_token','formid']);
+
+            $data['profileId'] = $request->formid;
+            $data['userId'] = $request->userId;
+            $data['qualification'] = $request->qualification;
+
+            $data['pgCollege'] = $request->pgCollege;
+            $data['pgSubject'] = $request->pgSubject;
+            $data['pgYear'] = $request->pgYear;
+            $data['pgResultType'] = $request->pgPerNa;
+            $data['pgPercentage'] = $request->pgPercentage;
+            $data['pgUniversity'] = $request->pgUniversity;
+            $data['pgPoints'] = $request->pgPoints;
+
+            $phdNA = $request->phdNA;
+            if($phdNA==2){
+                $data['phdRegDate'] = $request->phdRegDate;
+                $data['phdSubDate'] = $request->phdSubDate;
+                $data['phdAwardDate'] = $request->phdAwardDate;
+                $data['phdThesisTitle'] = $request->phdThesisTitle;
+                $data['phdUniversity'] = $request->phdUniversity;
+                $data['phdPoints'] = $request->phdPoints;
+            }else{
+                $data['phdRegDate'] = "";
+                $data['phdSubDate'] = "";
+                $data['phdAwardDate'] = "";
+                $data['phdThesisTitle'] = "";
+                $data['phdUniversity'] = "";
+                $data['phdPoints'] = "";
+            }
+
+             $net = $request->net;
+             if($net <4){
+                $data['net'] = $request->net;
+                $data['netSubject'] = $request->netSubject;
+                $data['netCertificateNo'] = $request->netCertificateNo;
+
+             }
+            
+           
+            Academic::create($data);
+            $ide = Crypt::encrypt($request->formid);
+
+            return redirect("/form/edit/$ide"); 
+
+    }
+
     public function eligibilitylist()
     {
          $currentUser = Auth::user();
